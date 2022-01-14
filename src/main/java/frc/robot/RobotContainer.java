@@ -28,6 +28,7 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -305,12 +306,12 @@ public class RobotContainer {
     } 
     
     if (canDeviceFinder.isDevicePresent(CANDeviceType.PCM, 0) || iAmACompetitionRobot) {
-      theCompressor = new Compressor(0);
-      solenoidArmUp = new Solenoid(0);
-      intakeSubsystemArmDown = new Solenoid(1);
-      liftBrake = new DoubleSolenoid(2,3);
-      liftRelease = new Solenoid(4);
-      visionLight = new Solenoid(7);
+      theCompressor = new Compressor(0, PneumaticsModuleType.CTREPCM);
+      solenoidArmUp = new Solenoid(PneumaticsModuleType.CTREPCM, 0);
+      intakeSubsystemArmDown = new Solenoid(PneumaticsModuleType.CTREPCM, 1);
+      liftBrake = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, 2,3);
+      liftRelease = new Solenoid(PneumaticsModuleType.CTREPCM, 4);
+      visionLight = new Solenoid(PneumaticsModuleType.CTREPCM, 7);
     }
   }
 

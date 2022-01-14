@@ -11,11 +11,11 @@ import edu.wpi.first.wpilibj.RobotController;
 import org.usfirst.frc3620.misc.CANDeviceId;
 
 public class RobotDataLogger {
-	PowerDistributionPanel powerDistributionPanel = null;
+	PowerDistribution powerDistributionPanel = null;
 	DriverStation driverStation = DriverStation.getInstance();
 
 	public RobotDataLogger (DataLogger dataLogger, CANDeviceFinder canDeviceFinder) {
-		powerDistributionPanel = new PowerDistributionPanel();
+		powerDistributionPanel = new PowerDistribution();
 
 		dataLogger.addDataProvider("matchTime", () -> f2(driverStation.getMatchTime()));
 		dataLogger.addDataProvider("robotMode", () -> Robot.currentRobotMode.toString());
@@ -29,7 +29,7 @@ public class RobotDataLogger {
 		}
 
 		if (RobotContainer.theCompressor != null) {
-			dataLogger.addDataProvider("compressorCurrent", () -> f2(RobotContainer.theCompressor.getCompressorCurrent()));
+			dataLogger.addDataProvider("compressorCurrent", () -> f2(RobotContainer.theCompressor.getCurrent()));
 		}
 
 		if (RobotContainer.liftSubsystemWinch != null){

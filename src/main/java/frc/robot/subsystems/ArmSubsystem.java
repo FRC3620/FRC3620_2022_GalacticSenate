@@ -48,10 +48,10 @@ public class ArmSubsystem extends SubsystemBase {
    * are here as a basic example.
    */
 
-  private final Color kBlueTarget = ColorMatch.makeColor(0.170, 0.455, 0.320);
-  private final Color kGreenTarget = ColorMatch.makeColor(0.246, 0.506, 0.249);
-  private final Color kRedTarget = ColorMatch.makeColor(0.379, 0.408, 0.205);
-  private final Color kYellowTarget = ColorMatch.makeColor(0.314, 0.524, 0.124);
+  private final Color kBlueTarget = new Color(0.170, 0.455, 0.320);
+  private final Color kGreenTarget = new Color(0.246, 0.506, 0.249);
+  private final Color kRedTarget = new Color(0.379, 0.408, 0.205);
+  private final Color kYellowTarget = new Color(0.314, 0.524, 0.124);
 
   public enum TargetColor {
     BLUE, GREEN, RED, YELLOW, UNKNOWN
