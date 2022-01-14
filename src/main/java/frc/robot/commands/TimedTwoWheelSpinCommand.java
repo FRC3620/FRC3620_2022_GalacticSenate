@@ -22,7 +22,6 @@ public class TimedTwoWheelSpinCommand extends CommandBase {
   public TimedTwoWheelSpinCommand(DriveSubsystem driveSubsystem, VisionSubsystem visionSubsystem) {
     this.driveSubsystem = driveSubsystem;
     this.visionSubsystem = visionSubsystem;
-    boolean amICorrecting;
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
@@ -36,8 +35,8 @@ public class TimedTwoWheelSpinCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    double yaw = visionSubsystem.getShootingTargetYaw();
-    boolean areWeCentered = visionSubsystem.getShootingTargetCentered();
+    //double yaw = visionSubsystem.getShootingTargetYaw();
+    //boolean areWeCentered = visionSubsystem.getShootingTargetCentered();
     driveSubsystem.twoWheelRotation(0.3);
   }
 

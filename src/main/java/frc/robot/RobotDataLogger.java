@@ -12,12 +12,11 @@ import org.usfirst.frc3620.misc.CANDeviceId;
 
 public class RobotDataLogger {
 	PowerDistribution powerDistributionPanel = null;
-	DriverStation driverStation = DriverStation.getInstance();
 
 	public RobotDataLogger (DataLogger dataLogger, CANDeviceFinder canDeviceFinder) {
 		powerDistributionPanel = new PowerDistribution();
 
-		dataLogger.addDataProvider("matchTime", () -> f2(driverStation.getMatchTime()));
+		dataLogger.addDataProvider("matchTime", () -> f2(DriverStation.getMatchTime()));
 		dataLogger.addDataProvider("robotMode", () -> Robot.currentRobotMode.toString());
 		dataLogger.addDataProvider("robotModeInt", () -> Robot.currentRobotMode.ordinal());
 		dataLogger.addDataProvider("batteryVoltage", () -> f2(RobotController.getBatteryVoltage()));

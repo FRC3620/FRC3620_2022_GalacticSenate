@@ -45,7 +45,7 @@ public class AutoDriveAndAimCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    double heading = driveSubsystem.getNavXFixedAngle(); 
+    // double heading = driveSubsystem.getNavXFixedAngle(); 
 
     double currentPosition = driveSubsystem.getDriveMotorPositionRightFront();
     double spinX = -driveSubsystem.getSpinPower();

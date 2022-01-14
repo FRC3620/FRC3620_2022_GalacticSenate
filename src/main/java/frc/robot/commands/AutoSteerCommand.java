@@ -76,7 +76,7 @@ public class AutoSteerCommand extends CommandBase {
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        double spinX = -driveSubsystem.getSpinPower();
+        // double spinX = -driveSubsystem.getSpinPower();
         driveSubsystem.setWheelsToStrafe(strafeAngle);
 
         double currentPositionRightFront = driveSubsystem.getDriveMotorPositionRightFront();
@@ -84,10 +84,10 @@ public class AutoSteerCommand extends CommandBase {
         double currentPositionRightBack = driveSubsystem.getDriveMotorPositionRightBack();
         double currentPositionLeftBack = driveSubsystem.getDriveMotorPositionLeftBack();
 
-        double distanceTravelledRightFront = Math.abs(currentPositionRightFront - initialPositionRightFront);
-        double distanceTravelledLeftFront = Math.abs(currentPositionLeftFront - initialPositionLeftFront);
-        double distanceTravelledRightBack = Math.abs(currentPositionRightBack - initialPositionRightBack);
-        double distanceTravelledLeftBack = Math.abs(currentPositionLeftBack - initialPositionLeftBack);
+        //double distanceTravelledRightFront = Math.abs(currentPositionRightFront - initialPositionRightFront);
+        //double distanceTravelledLeftFront = Math.abs(currentPositionLeftFront - initialPositionLeftFront);
+        //double distanceTravelledRightBack = Math.abs(currentPositionRightBack - initialPositionRightBack);
+        //double distanceTravelledLeftBack = Math.abs(currentPositionLeftBack - initialPositionLeftBack);
 
         if (autonomousLogger != null) {
           autonomousLogger.setCurrentDrivePositions(currentPositionLeftFront, currentPositionRightFront, currentPositionLeftBack, currentPositionRightBack);

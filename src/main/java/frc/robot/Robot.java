@@ -43,8 +43,6 @@ public class Robot extends TimedRobot {
   private Logger logger;
   static RobotMode currentRobotMode = RobotMode.INIT, previousRobotMode;
 
-  DriverStation driverStation;
-
   /**
    * This function is run when the robot is first started up and should be used for any
    * initialization code.
@@ -55,8 +53,6 @@ public class Robot extends TimedRobot {
 
     PortForwarder.add (10080, "frcvision.local", 80);
     PortForwarder.add (10022, "frcvision.local", 22);
-
-    driverStation = DriverStation.getInstance();
 
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
@@ -231,13 +227,13 @@ public class Robot extends TimedRobot {
   }
 
   void logMatchInfo() {
-    if (driverStation.isFMSAttached()) {
+    if (DriverStation.isFMSAttached()) {
       logger.info("FMS attached. Event name {}, match type {}, match number {}, replay number {}", 
-        driverStation.getEventName(),
-        driverStation.getMatchType(),
-        driverStation.getMatchNumber(),
-        driverStation.getReplayNumber());
+        DriverStation.getEventName(),
+        DriverStation.getMatchType(),
+        DriverStation.getMatchNumber(),
+        DriverStation.getReplayNumber());
     }
-    logger.info("Alliance {}, position {}", driverStation.getAlliance(), driverStation.getLocation());
+    logger.info("Alliance {}, position {}", DriverStation.getAlliance(), DriverStation.getLocation());
   }
 }

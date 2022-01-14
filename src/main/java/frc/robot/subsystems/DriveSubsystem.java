@@ -24,7 +24,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.RobotContainer;
 import frc.robot.commands.TeleOpDriveCommand;
-import frc.robot.commands.StayStillDriveCommand;
 import frc.robot.miscellaneous.DriveVectors;
 import frc.robot.miscellaneous.SwerveCalculator;
 import frc.robot.miscellaneous.Vector;
@@ -126,7 +125,6 @@ public class DriveSubsystem extends SubsystemBase {
 
 	private boolean drivePIDTuning = false;
 
-	private boolean changeAzimuthTestHeading = false;
 	private boolean fieldRelative = true;
 
 	private PIDController spinPIDController;

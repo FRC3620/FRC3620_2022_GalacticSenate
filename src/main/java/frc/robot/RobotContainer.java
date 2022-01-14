@@ -38,8 +38,6 @@ import org.usfirst.frc3620.logger.EventLogging;
 import org.usfirst.frc3620.logger.EventLogging.Level;
 import org.usfirst.frc3620.misc.CANDeviceFinder;
 import org.usfirst.frc3620.misc.DPad;
-import org.usfirst.frc3620.misc.DoubleTriggerButton;
-import org.usfirst.frc3620.misc.LightEffect;
 import org.usfirst.frc3620.misc.TriggerButton;
 import org.usfirst.frc3620.misc.XBoxConstants;
 import org.usfirst.frc3620.misc.CANDeviceId.CANDeviceType;

@@ -3,8 +3,6 @@ import com.google.gson.reflect.TypeToken;
 import frc.robot.commands.GalacticSearchPath;
 import frc.robot.commands.PixyPathFinder;
 import frc.robot.subsystems.PixySubsystem;
-import org.junit.Assert;
-import org.junit.Test;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
@@ -12,11 +10,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.PathMatcher;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.toList;
 

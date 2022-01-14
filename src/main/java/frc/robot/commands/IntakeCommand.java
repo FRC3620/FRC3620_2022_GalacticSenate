@@ -4,11 +4,8 @@ import org.slf4j.Logger;
 import org.usfirst.frc3620.logger.EventLogging;
 import org.usfirst.frc3620.logger.EventLogging.Level;
 
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.IntakeSubsystem;
-import frc.robot.RobotContainer;
-import org.usfirst.frc3620.misc.LightEffect;
 
 /**
  * @author Noah Dressander (532377)

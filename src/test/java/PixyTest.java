@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 public class PixyTest {
     Gson gson = new Gson();
 
-    //@Test
+    @Test
     public void t1() {
         List<PixySubsystem.PixyBlockPlus> bb = parse("[{\"block\":{\"signature\":2,\"x\":165,\"y\":54,\"width\":86,\"height\":56,\"angle\":0,\"index\":60,\"age\":255},\"aspectRatio\":1.5357142857142858,\"area\":4816,\"bottom\":82.0,\"tags\":[\"o:1\"]},{\"block\":{\"signature\":1,\"x\":276,\"y\":93,\"width\":56,\"height\":59,\"angle\":0,\"index\":25,\"age\":255},\"aspectRatio\":0.9491525423728814,\"area\":3304,\"bottom\":122.5,\"tags\":[\"o:2\",\"big_enough\",\"aspectOk\",\"decider\"]}]");
         printBlocks("** t1 raw", bb);
@@ -35,7 +35,7 @@ public class PixyTest {
         Assert.assertEquals("filtered block size", bbb.size(), 1);
     }
 
-    //@Test
+    @Test
     public void t2() {
         String s = "[{\"block\":{\"signature\":2,\"x\":165,\"y\":54,\"width\":86,\"height\":56,\"angle\":0,\"index\":60,\"age\":255},\"aspectRatio\":1.5357142857142858,\"area\":4816,\"bottom\":82.0,\"tags\":[\"o:1\"]},{\"block\":{\"signature\":1,\"x\":276,\"y\":93,\"width\":56,\"height\":59,\"angle\":0,\"index\":25,\"age\":255},\"aspectRatio\":0.9491525423728814,\"area\":3304,\"bottom\":122.5,\"tags\":[\"o:2\",\"big_enough\",\"aspectOk\",\"decider\"]}]";
         System.out.println(s);
@@ -58,7 +58,7 @@ public class PixyTest {
         //Assert.assertEquals("filtered block size", bbb.size(), 1);
     }
 
-    //@Test
+    @Test
     public void testPixySillyPathFinder1() {
         testOneSillyCase(
                 "[{\"block\":{\"signature\":1,\"x\":111,\"y\":34,\"width\":38,\"height\":47,\"angle\":0,\"index\":35,\"age\":255},\"aspectRatio\":0.8085106382978723,\"area\":1786,\"bottom\":57.5,\"tags\":[\"o:1\",\"big_enough\",\"aspectOk\",\"decider\"]},{\"block\":{\"signature\":2,\"x\":102,\"y\":94,\"width\":44,\"height\":6,\"angle\":0,\"index\":37,\"age\":255},\"aspectRatio\":7.333333333333333,\"area\":264,\"bottom\":97.0,\"tags\":[\"o:2\"]},{\"block\":{\"signature\":1,\"x\":168,\"y\":125,\"width\":12,\"height\":5,\"angle\":0,\"index\":75,\"age\":30},\"aspectRatio\":2.4,\"area\":60,\"bottom\":127.5,\"tags\":[\"o:3\"]}]",

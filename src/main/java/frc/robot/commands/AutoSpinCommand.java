@@ -14,10 +14,6 @@ public class AutoSpinCommand extends CommandBase {
 
   private DriveSubsystem driveSubsystem;
 
-  private double initialPosition;
-  private double distanceTravelled;
-  private double desiredDistance;
-  private double desiredAngle;
   private double desiredHeading;
   private double pathSpeed;
 
@@ -39,10 +35,9 @@ public class AutoSpinCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    double heading = driveSubsystem.getNavXFixedAngle(); 
+    //double heading = driveSubsystem.getNavXFixedAngle(); 
     double spinX = pathSpeed;
     driveSubsystem.timedDrive(0, 0, spinX);
-
   }
 
   // Called once the command ends or is interrupted.

@@ -245,7 +245,6 @@ public class CANDeviceFinder {
     */
     boolean logCanBusIds = false;
     private int canBusId (int devType, int mfg, int apiId, int devId) {
-        // TODO bounds check parameters
         int rv = ((devType & 0xff) << 24) |
           ((mfg & 0xff) << 16 ) |
           ((apiId & 0x3ff) << 6) |

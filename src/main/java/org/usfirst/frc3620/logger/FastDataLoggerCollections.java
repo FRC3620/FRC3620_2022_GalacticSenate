@@ -2,7 +2,6 @@ package org.usfirst.frc3620.logger;
 
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.IllegalFormatConversionException;
 import java.util.List;
 
 public class FastDataLoggerCollections extends FastDataLoggerBase {

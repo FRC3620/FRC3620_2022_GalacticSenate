@@ -157,11 +157,16 @@ public class PixySubsystem extends SubsystemBase {
     SmartDashboard.putString (DASHBOARD_GALACTICSEARCH_PATH, GalacticSearchPath.NOT_RUN.toString());
 
     // get ready to run the update periodically, waiting for pixy data
-    Notifier follower = new Notifier(() -> {
-      update(true);
-    });
-    // and do so every 0.500s
-    follower.startPeriodic(0.500);
+
+    try (
+      // 2022.01.14 this did not used to have a try-with-resources; if there are problems, remove it
+      Notifier follower = new Notifier(() -> {
+        update(true);
+      });
+    ) {
+      // and do so every 0.500s
+      follower.startPeriodic(0.500);
+    }
   }
 
   public int update() {

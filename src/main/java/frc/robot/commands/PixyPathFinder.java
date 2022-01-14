@@ -5,7 +5,6 @@ import org.slf4j.Logger;
 import org.usfirst.frc3620.logger.EventLogging;
 
 import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 public class PixyPathFinder {

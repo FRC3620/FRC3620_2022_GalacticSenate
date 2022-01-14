@@ -7,7 +7,6 @@
 
 package frc.robot.commands;
 
-import frc.robot.RobotContainer;
 import frc.robot.subsystems.BeltSubsystem;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
@@ -33,13 +32,13 @@ public class BeltIdleCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-   // RobotContainer.beltSubsystem.BeltOn(-0.2);
+   // beltSubsystem.BeltOn(-0.2);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    RobotContainer.beltSubsystem.BeltOff();
+    beltSubsystem.BeltOff();
   }
 
   // Returns true when the command should end.
