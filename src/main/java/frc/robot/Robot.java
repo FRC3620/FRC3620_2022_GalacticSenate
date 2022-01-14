@@ -1,0 +1,243 @@
+/*----------------------------------------------------------------------------*/
+/* Copyright (c) 2017-2019 FIRST. All Rights Reserved.                        */
+/* Open Source Software - may be modified and shared by FRC teams. The code   */
+/* must be accompanied by the FIRST BSD license file in the root directory of */
+/* the project.                                                               */
+/*----------------------------------------------------------------------------*/
+
+package frc.robot;
+
+import java.util.function.Consumer;
+
+import frc.robot.commands.*;
+import org.slf4j.Logger;
+import org.usfirst.frc3620.logger.DataLogger;
+import org.usfirst.frc3620.logger.EventLogging;
+import org.usfirst.frc3620.logger.EventLogging.Level;
+
+import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.CommandScheduler;
+
+import edu.wpi.first.util.net.PortForwarder;
+
+import org.usfirst.frc3620.misc.LightEffect;
+import org.usfirst.frc3620.misc.RobotMode;
+
+
+/**
+ * The VM is configured to automatically run this class, and to call the functions corresponding to
+ * each mode, as described in the TimedRobot documentation. If you change the name of this class or
+ * the package after creating this project, you must also update the build.gradle file in the
+ * project.
+ */
+public class Robot extends TimedRobot {
+  
+  private Command m_autonomousCommand;
+  SendableChooser<Command> chooser = new SendableChooser<>();
+  private RobotContainer m_robotContainer;
+
+  private Logger logger;
+  static RobotMode currentRobotMode = RobotMode.INIT, previousRobotMode;
+
+  DriverStation driverStation;
+
+  /**
+   * This function is run when the robot is first started up and should be used for any
+   * initialization code.
+   */
+  @Override
+  public void robotInit() {
+    logger = EventLogging.getLogger(Robot.class, Level.INFO);
+
+    PortForwarder.add (10080, "frcvision.local", 80);
+    PortForwarder.add (10022, "frcvision.local", 22);
+
+    driverStation = DriverStation.getInstance();
+
+    // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
+    // autonomous chooser on the dashboard.
+    m_robotContainer = new RobotContainer();
+    RobotContainer.lightSubsystem.setPreset(LightEffect.Preset.INIT);
+
+    CommandScheduler.getInstance().onCommandInitialize(new Consumer<Command>() {//whenever a command initializes, the function declared bellow will run.
+      public void accept(Command command) {
+        logger.info("Initialized {}", command.getClass().getSimpleName());//I scream at people
+      }
+
+      
+    });
+
+    CommandScheduler.getInstance().onCommandFinish(new Consumer<Command>() {//whenever a command ends, the function declared bellow will run.
+      public void accept(Command command) {
+        logger.info("Ended {}", command.getClass().getSimpleName());//I, too, scream at people
+      }
+    });
+
+    CommandScheduler.getInstance().onCommandInterrupt(new Consumer<Command>() {//whenever a command ends, the function declared bellow will run.
+      public void accept(Command command) {
+        logger.info("Interrupted {}", command.getClass().getSimpleName());//I, in addition, as well, scream.
+      }
+    });
+    
+    chooser.addOption("Default Auto", m_robotContainer.getAutonomousCommand()); // add auto modes to selector here
+    chooser.addOption("Trench Auto", m_robotContainer.getTrenchAuto()); // 6 ball auto
+    chooser.addOption("Mean Machine Auto", m_robotContainer.getMeanMachineAuto());  //golden auto 
+    chooser.addOption("Wait And Shoot Auto", m_robotContainer.getWaitAndSchootAuto());
+    chooser.addOption("Slalom 2-5", new Slalom25Command(RobotContainer.driveSubsystem)); // maybe not best method not using m_robotContainer
+    chooser.addOption("Slalom 2-6", new Slalom26Command(RobotContainer.driveSubsystem));
+    chooser.addOption("Slalom 2-7", new Slalom27Command(RobotContainer.driveSubsystem));
+    chooser.addOption("Slalom 2-8", new Slalom28Command(RobotContainer.driveSubsystem));
+    chooser.addOption("Neutronium Auto", m_robotContainer.getNeutroniumAuto());
+    chooser.addOption("figure 23 path A Blue", m_robotContainer.getFigure23PathABlue()); // don't null
+    chooser.addOption("figure 23 path B blue", m_robotContainer.getFigure23PathBblueCommand()); // for method drew did with the new command " get _" must do m_robotContainer
+    chooser.addOption("figure 23 path B Red", m_robotContainer.getFigure23PathBRedCommand()); // don't need to import through m_robotContainer
+    chooser.addOption("figure 23 path A Red", m_robotContainer.getFigure23PathARedCommand());
+    
+    
+    //chooser.addOption("Slalom 2-3 Red", new Figure23PathARedCommand(RobotContainer.driveSubsystem, RobotContainer.intakeSubsystem));
+    //chooser.addOption("Slalom 2-3 Blue", new Figure23PathABlueCommand(RobotContainer.driveSubsystem, RobotContainer.intakeSubsystem));
+    //chooser.addOption("Slalom 2-4 Red", new Figure24PathBRedCommand(RobotContainer.driveSubsystem, RobotContainer.intakeSubsystem));
+    //chooser.addOption("Slalom 2-4 Blue", new Figure24PathBBlueCommand(RobotContainer.driveSubsystem, RobotContainer.intakeSubsystem));
+    chooser.addOption("Galactic Search", new GalacticSearchPickerCommand(RobotContainer.pixySubsystem, RobotContainer.driveSubsystem, RobotContainer.intakeSubsystem));
+    //chooser.addOption("QuarterTurnTest", new QuarterTurnTestCommand(m_robotContainer.driveSubsystem));
+    //chooser.addDefaultOption("Autonomous Command", m_robotContainer.getAutonomousCommand());
+    SmartDashboard.putData("Auto mode", chooser);
+
+
+     // get data logging going
+     DataLogger robotDataLogger = new DataLogger();
+     new RobotDataLogger(robotDataLogger, RobotContainer.canDeviceFinder);
+     robotDataLogger.setInterval(0.25);
+     robotDataLogger.start();
+     //OperatorView operatorView = new OperatorView();
+    // operatorView.operatorViewInit(RobotContainer.amICompBot());
+  }
+
+
+  /**
+   * This function is called every robot packet, no matter the mode. Use this for items like
+   * diagnostics that you want ran during disabled, autonomous, teleoperated and test.
+   *
+   * <p>This runs after the mode specific periodic functions, but before
+   * LiveWindow and SmartDashboard integrated updating.
+   */
+  @Override
+  public void robotPeriodic() {
+    // Runs the Scheduler.  This is responsible for polling buttons, adding newly-scheduled
+    // commands, running already-scheduled commands, removing finished or interrupted commands,
+    // and running subsystem periodic() methods.  This must be called from the robot's periodic
+    // block in order for anything in the Command-based framework to work.
+    CommandScheduler.getInstance().run();
+  }
+  
+
+  /**
+   * This function is called once each time the robot enters Disabled mode.
+   */
+  @Override
+  public void disabledInit() {
+    processRobotModeChange(RobotMode.DISABLED);
+    RobotContainer.lightSubsystem.setPreset(LightEffect.Preset.DISABLED);
+  }
+
+  @Override
+  public void disabledPeriodic() {
+  }
+
+  /**
+   * This autonomous runs the autonomous command selected by your {@link RobotContainer} class.
+   */
+  @Override
+  public void autonomousInit() {
+    processRobotModeChange(RobotMode.AUTONOMOUS);
+    //m_autonomousCommand = m_robotContainer.getAutonomousCommand();
+    m_autonomousCommand = chooser.getSelected();
+
+    // schedule the autonomous command (example)
+    if (m_autonomousCommand != null) {
+      m_autonomousCommand.schedule();
+    }
+
+    RobotContainer.lightSubsystem.setPreset(LightEffect.Preset.AUTO);
+  }
+
+  /**
+   * This function is called periodically during autonomous.
+   */
+  @Override
+  public void autonomousPeriodic() {
+  }
+
+  @Override
+  public void teleopInit() {
+    // This makes sure that the autonomous stops running when
+    // teleop starts running. If you want the autonomous to
+    // continue until interrupted by another command, remove
+    // this line or comment it out.
+    if (m_autonomousCommand != null) {
+      m_autonomousCommand.cancel();
+    }
+
+    processRobotModeChange(RobotMode.TELEOP);
+    logMatchInfo();
+
+    RobotContainer.lightSubsystem.setPreset(LightEffect.Preset.TELEOP);
+  }
+
+  /**
+   * This function is called periodically during operator control.
+   */
+  @Override
+  public void teleopPeriodic() {
+  }
+
+  @Override
+  public void testInit() {
+    // Cancels all running commands at the start of test mode.
+    CommandScheduler.getInstance().cancelAll();
+
+    processRobotModeChange(RobotMode.TEST);
+    RobotContainer.lightSubsystem.setPreset(LightEffect.Preset.TEST);
+  }
+
+  /**
+   * This function is called periodically during test mode.
+   */
+  @Override
+  public void testPeriodic() {
+  }
+
+  /*
+	 * this routine gets called whenever we change modes
+	 */
+	void processRobotModeChange(RobotMode newMode) {
+		logger.info("Switching from {} to {}", currentRobotMode, newMode);
+		
+		previousRobotMode = currentRobotMode;
+		currentRobotMode = newMode;
+
+		// if any subsystems need to know about mode changes, let
+		// them know here.
+		// exampleSubsystem.processRobotModeChange(newMode);
+		
+  }
+  
+  public static RobotMode getCurrentRobotMode(){
+    return currentRobotMode;
+  }
+
+  void logMatchInfo() {
+    if (driverStation.isFMSAttached()) {
+      logger.info("FMS attached. Event name {}, match type {}, match number {}, replay number {}", 
+        driverStation.getEventName(),
+        driverStation.getMatchType(),
+        driverStation.getMatchNumber(),
+        driverStation.getReplayNumber());
+    }
+    logger.info("Alliance {}, position {}", driverStation.getAlliance(), driverStation.getLocation());
+  }
+}
