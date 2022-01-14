@@ -10,10 +10,10 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
-import com.revrobotics.CANEncoder;
-import com.revrobotics.CANPIDController;
+import com.revrobotics.RelativeEncoder;
+import com.revrobotics.SparkMaxPIDController;
 import com.revrobotics.CANSparkMax;
-import com.revrobotics.ControlType;
+import com.revrobotics.CANSparkMax.ControlType;
 
 import org.usfirst.frc3620.misc.RobotMode;
 
@@ -30,8 +30,8 @@ public class ShooterSubsystem extends SubsystemBase {
   private final WPI_TalonFX falconTop = RobotContainer.shooterSubsystemFalcon1;
   private final WPI_TalonFX falconBottom = RobotContainer.shooterSubsystemFalcon3;
   private final CANSparkMax hoodMotor = RobotContainer.shooterSubsystemHoodMax;
-  private CANEncoder hoodEncoder = RobotContainer.shooterSubsystemHoodEncoder;
-  private CANPIDController anglePID;
+  private RelativeEncoder hoodEncoder = RobotContainer.shooterSubsystemHoodEncoder;
+  private SparkMaxPIDController anglePID;
   private DigitalInput limitSwitch = RobotContainer.hoodLimitSwitch;
   private Boolean encoderIsValid = false;
 

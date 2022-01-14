@@ -14,7 +14,7 @@ import edu.wpi.first.wpilibj.util.Color8Bit;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-import com.revrobotics.CANEncoder;
+import com.revrobotics.RelativeEncoder;
 import com.revrobotics.CANSparkMax;
 
 import frc.robot.Robot;
@@ -27,7 +27,7 @@ public class LiftSubsystem extends SubsystemBase {
   private boolean lightTriggered = false;
   Logger logger = EventLogging.getLogger(getClass(), Level.INFO);
   private final CANSparkMax liftController = RobotContainer.liftSubsystemWinch; // motor lower lift on winch
-  private final CANEncoder liftEncoder = RobotContainer.liftEncoder;
+  private final RelativeEncoder liftEncoder = RobotContainer.liftEncoder;
   private DoubleSolenoid brake = RobotContainer.liftBrake;
   private Solenoid release = RobotContainer.liftRelease;
   private DigitalInput limitSwitch = RobotContainer.liftLimitSwitch;

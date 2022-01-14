@@ -16,7 +16,7 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.StatorCurrentLimitConfiguration;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-import com.revrobotics.CANEncoder;
+import com.revrobotics.RelativeEncoder;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
@@ -73,26 +73,26 @@ public class RobotContainer {
   // hardware here...
   public static CANSparkMax driveSubsystemRightFrontDrive;
   public static CANSparkMax driveSubsystemRightFrontAzimuth;
-  public static CANEncoder driveSubsystemRightFrontDriveEncoder;
-  public static CANEncoder driveSubsystemRightFrontAzimuthEncoder;
+  public static RelativeEncoder driveSubsystemRightFrontDriveEncoder;
+  public static RelativeEncoder driveSubsystemRightFrontAzimuthEncoder;
   public static AnalogInput driveSubsystemRightFrontHomeEncoder;
   
   public static CANSparkMax driveSubsystemLeftFrontDrive;
   public static CANSparkMax driveSubsystemLeftFrontAzimuth;
-  public static CANEncoder driveSubsystemLeftFrontDriveEncoder;
-  public static CANEncoder driveSubsystemLeftFrontAzimuthEncoder;
+  public static RelativeEncoder driveSubsystemLeftFrontDriveEncoder;
+  public static RelativeEncoder driveSubsystemLeftFrontAzimuthEncoder;
   public static AnalogInput driveSubsystemLeftFrontHomeEncoder;
   
   public static CANSparkMax driveSubsystemLeftBackDrive;
   public static CANSparkMax driveSubsystemLeftBackAzimuth;
-  public static CANEncoder driveSubsystemLeftBackDriveEncoder;
-  public static CANEncoder driveSubsystemLeftBackAzimuthEncoder;
+  public static RelativeEncoder driveSubsystemLeftBackDriveEncoder;
+  public static RelativeEncoder driveSubsystemLeftBackAzimuthEncoder;
   public static AnalogInput driveSubsystemLeftBackHomeEncoder;
   
   public static CANSparkMax driveSubsystemRightBackDrive;
   public static CANSparkMax driveSubsystemRightBackAzimuth;
-  public static CANEncoder driveSubsystemRightBackDriveEncoder;
-  public static CANEncoder driveSubsystemRightBackAzimuthEncoder;
+  public static RelativeEncoder driveSubsystemRightBackDriveEncoder;
+  public static RelativeEncoder driveSubsystemRightBackAzimuthEncoder;
   public static AnalogInput driveSubsystemRightBackHomeEncoder;
   
   public static WPI_TalonSRX m_armMotor;
@@ -101,10 +101,10 @@ public class RobotContainer {
   public static WPI_TalonFX shooterSubsystemFalcon3;
   public static WPI_TalonSRX shooterSubsystemBallFeeder; 
   public static CANSparkMax shooterSubsystemHoodMax;
-  public static CANEncoder shooterSubsystemHoodEncoder;
+  public static RelativeEncoder shooterSubsystemHoodEncoder;
   public static CANSparkMax intakeSubsystemSparkMax;
   public static CANSparkMax liftSubsystemWinch;
-  public static CANEncoder liftEncoder;
+  public static RelativeEncoder liftEncoder;
 
   public static Solenoid solenoidArmUp;
   public static Solenoid intakeSubsystemArmDown;

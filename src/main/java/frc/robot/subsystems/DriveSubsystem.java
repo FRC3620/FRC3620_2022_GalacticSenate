@@ -8,10 +8,10 @@
 package frc.robot.subsystems;
 
 import com.kauailabs.navx.frc.AHRS;
-import com.revrobotics.CANEncoder;
-import com.revrobotics.CANPIDController;
+import com.revrobotics.RelativeEncoder;
+import com.revrobotics.SparkMaxPIDController;
 import com.revrobotics.CANSparkMax;
-import com.revrobotics.ControlType;
+import com.revrobotics.CANSparkMax.ControlType;
 import com.revrobotics.CANSparkMax.IdleMode;
 
 import org.slf4j.Logger;
@@ -35,35 +35,35 @@ public class DriveSubsystem extends SubsystemBase {
   
     public final CANSparkMax rightFrontDriveMaster = RobotContainer.driveSubsystemRightFrontDrive;
 	public final CANSparkMax rightFrontAzimuth = RobotContainer.driveSubsystemRightFrontAzimuth;
-	public final CANEncoder rightFrontDriveEncoder = RobotContainer.driveSubsystemRightFrontDriveEncoder;
-	public final CANEncoder rightFrontAzimuthEncoder = RobotContainer.driveSubsystemRightFrontAzimuthEncoder;
+	public final RelativeEncoder rightFrontDriveEncoder = RobotContainer.driveSubsystemRightFrontDriveEncoder;
+	public final RelativeEncoder rightFrontAzimuthEncoder = RobotContainer.driveSubsystemRightFrontAzimuthEncoder;
 	public final AnalogInput rightFrontHomeEncoder = RobotContainer.driveSubsystemRightFrontHomeEncoder;
-	public CANPIDController rightFrontVelPID; // don't assign unless we have the motor controller
-	public CANPIDController rightFrontPositionPID;
+	public SparkMaxPIDController rightFrontVelPID; // don't assign unless we have the motor controller
+	public SparkMaxPIDController rightFrontPositionPID;
 
 	public final CANSparkMax leftFrontDriveMaster = RobotContainer.driveSubsystemLeftFrontDrive;
 	public final CANSparkMax leftFrontAzimuth = RobotContainer.driveSubsystemLeftFrontAzimuth;
-	public final CANEncoder leftFrontDriveEncoder = RobotContainer.driveSubsystemLeftFrontDriveEncoder;
-	public final CANEncoder leftFrontAzimuthEncoder = RobotContainer.driveSubsystemLeftFrontAzimuthEncoder;
+	public final RelativeEncoder leftFrontDriveEncoder = RobotContainer.driveSubsystemLeftFrontDriveEncoder;
+	public final RelativeEncoder leftFrontAzimuthEncoder = RobotContainer.driveSubsystemLeftFrontAzimuthEncoder;
 	public final AnalogInput leftFrontHomeEncoder = RobotContainer.driveSubsystemLeftFrontHomeEncoder;
-	public CANPIDController leftFrontVelPID;
-	public CANPIDController leftFrontPositionPID;
+	public SparkMaxPIDController leftFrontVelPID;
+	public SparkMaxPIDController leftFrontPositionPID;
 
 	public final CANSparkMax leftBackDriveMaster = RobotContainer.driveSubsystemLeftBackDrive;
 	public final CANSparkMax leftBackAzimuth = RobotContainer.driveSubsystemLeftBackAzimuth;
-	public final CANEncoder leftBackDriveEncoder = RobotContainer.driveSubsystemLeftBackDriveEncoder;
-	public final CANEncoder leftBackAzimuthEncoder = RobotContainer.driveSubsystemLeftBackAzimuthEncoder;
+	public final RelativeEncoder leftBackDriveEncoder = RobotContainer.driveSubsystemLeftBackDriveEncoder;
+	public final RelativeEncoder leftBackAzimuthEncoder = RobotContainer.driveSubsystemLeftBackAzimuthEncoder;
 	public final AnalogInput leftBackHomeEncoder = RobotContainer.driveSubsystemLeftBackHomeEncoder;
-	public CANPIDController leftBackVelPID;
-	public CANPIDController leftBackPositionPID;
+	public SparkMaxPIDController leftBackVelPID;
+	public SparkMaxPIDController leftBackPositionPID;
 
 	public final CANSparkMax rightBackDriveMaster = RobotContainer.driveSubsystemRightBackDrive;
 	public final CANSparkMax rightBackAzimuth = RobotContainer.driveSubsystemRightBackAzimuth;
-	public final CANEncoder rightBackDriveEncoder = RobotContainer.driveSubsystemRightBackDriveEncoder;
-	public final CANEncoder rightBackAzimuthEncoder = RobotContainer.driveSubsystemRightBackAzimuthEncoder;
+	public final RelativeEncoder rightBackDriveEncoder = RobotContainer.driveSubsystemRightBackDriveEncoder;
+	public final RelativeEncoder rightBackAzimuthEncoder = RobotContainer.driveSubsystemRightBackAzimuthEncoder;
 	public final AnalogInput rightBackHomeEncoder = RobotContainer.driveSubsystemRightBackHomeEncoder;
-	public CANPIDController rightBackVelPID;
-	public CANPIDController rightBackPositionPID;
+	public SparkMaxPIDController rightBackVelPID;
+	public SparkMaxPIDController rightBackPositionPID;
 
 	public AHRS ahrs = new AHRS(edu.wpi.first.wpilibj.SPI.Port.kMXP);
 
@@ -552,7 +552,7 @@ public class DriveSubsystem extends SubsystemBase {
 		}
 	}
 
-	public void setPositionPID(CANPIDController pidController) {
+	public void setPositionPID(SparkMaxPIDController pidController) {
 		if (pidController != null) {
 			pidController.setP(kPositionP);	
 			pidController.setI(kPositionI);
@@ -563,7 +563,7 @@ public class DriveSubsystem extends SubsystemBase {
 		}
 	}
 
-	public void setVelocityPID(CANPIDController pidController) {
+	public void setVelocityPID(SparkMaxPIDController pidController) {
 		if (pidController != null) {
 			pidController.setP(kVelocityP);	
 			pidController.setI(kVelocityI);
@@ -574,7 +574,7 @@ public class DriveSubsystem extends SubsystemBase {
 		}
 	}
 
-	public void updateVelocityPID(CANPIDController pidController) {
+	public void updateVelocityPID(SparkMaxPIDController pidController) {
 		if (pidController != null) {
 			double p = SmartDashboard.getNumber("P Gain Velocity", 0);
 			double i = SmartDashboard.getNumber("I Gain Velocity", 0);
@@ -614,7 +614,7 @@ public class DriveSubsystem extends SubsystemBase {
 		}
 	}
 
-	public void updatePositionPID(CANPIDController pidController) {
+	public void updatePositionPID(SparkMaxPIDController pidController) {
 
 		double p = SmartDashboard.getNumber("P Position Gain", 0);
     	double i = SmartDashboard.getNumber("I Position Gain", 0);
@@ -678,7 +678,7 @@ public class DriveSubsystem extends SubsystemBase {
 			rightBackAzimuthEncoder.setPosition(getHomeEncoderHeading(rightBackHomeEncoder) - RIGHT_BACK_ABSOLUTE_OFFSET);
 		}
 	}
-	public double getFixedPosition(CANEncoder encoder){
+	public double getFixedPosition(RelativeEncoder encoder){
   		if (encoder != null) {
 			double azimuth = encoder.getPosition();
 			azimuth = azimuth % 360;
@@ -697,7 +697,7 @@ public class DriveSubsystem extends SubsystemBase {
 		}
 	}
 
-	public Vector readModuleEncoders(CANEncoder azimuthEncoder, CANEncoder speedEncoder) { 
+	public Vector readModuleEncoders(RelativeEncoder azimuthEncoder, RelativeEncoder speedEncoder) { 
 		if(azimuthEncoder != null) {
 			double azimuth = azimuthEncoder.getPosition();
 			if(speedEncoder != null) {
